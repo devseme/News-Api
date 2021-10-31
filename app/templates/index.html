@@ -11,6 +11,12 @@
         {% endif %}
     </head>
     <body>
-
-    </body>
+        <!-- Popular source section  -->
+        <h3> Popular Sources</h3>
+         <ul>
+            {% for popular_sources in popular %}
+                <li>{{ popular_sources.title}}</li>
+            {% endfor %}
+        </ul>
+ </body>
 </html>
