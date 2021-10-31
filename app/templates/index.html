@@ -1,22 +1,24 @@
-<!-- <h1> {{ message }} </h1> -->
+{% extends 'base.html'%}
+{% import 'macros.html' as macro%}
+    
+{% block content %}
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        {% if title %}
-        <title> {{ title }}</title>
-        {% else %}
-        <title> Welcome to the best News Review website </title>
-        {% endif %}
-    </head>
-    <body>
-        <!-- Popular source section  -->
-        <h3> Popular Sources</h3>
-         <ul>
-            {% for popular_sources in popular %}
-                <li>{{ popular_sources.name}}</li>
-            {% endfor %}
-        </ul>
- </body>
-</html>
+
+<h3> Popular Sources</h3>
+<ul>
+    {{ macro.displaySourceList(popular)}}
+</ul>
+
+<h3> Technology News </h3>
+<ul>
+    {{ macro.displaySourceList(technology)}}
+</ul>
+
+<h3>Business News</h3>
+<ul>
+    {{ macro.displaySourceList(business)}}
+</ul>
+
+
+{% endblock%}
+

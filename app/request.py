@@ -1,5 +1,6 @@
 from app import app
 import urllib.request,json
+from .articles import Article
 
 from app.source_test import Source
 from .models import source
@@ -16,7 +17,7 @@ def get_sources():
     '''
     Function that gets the json response to our url request
     '''
-    get_sources_url = base_url.format(api_key)
+    get_sources_url = 'https://newsapi.org/v2/sources?apiKey=48b8d49793c8496288a3e67219f8a3a5'
 
     with urllib.request.urlopen(get_sources_url) as url:
         get_sources_data = url.read()
@@ -42,16 +43,58 @@ def process_results(source_list):
         source_results: A list of source objects
     '''
     source_results = []
-    for source_item in source_list:
-        id = source_item.get('id')
-        name = source_item.get('name')
-        description = source_item.get('description')
-        url = source_item.get('url')
-        category = source_item.get('category')
-        language = source_item.get('language')
+    for articles_item in source_list:
+        id = articles_item.get('id')
+        name = articles_item.get('name')
+        description = articles_item.get('description')
+        url = articles_item.get('url')
+        category = articles_item.get('category')
+        language = articles_item.get('language')
 
         if id:
             source_object = Source(id,name,description,url,category,language)
             source_results.append(source_object)
 
     return source_results    
+
+def process_articles(articles_list): 
+
+
+    articles_list = []
+    for articles_item in articles_list:
+        author = articles_item.get('author')
+        title = articles_item.get('title')
+        description = articles_item.get('description')
+        url = articles_item.get('url')
+        urlToImage = articles_item.get('urlToImage')
+        publishedAt = articles_item.get('publishedAt')
+        content = articles_item.get('content')
+
+
+        if id:
+            articles_object = Article(author,title,description,url,urlToImage,publishedAt,content)
+            articles_list.append(articles_object)
+
+    return articles_list
+
+def get_articles(source_id):
+    get_sources_url = 'https://newsapi.org/v2/top-headlines?sources={}&apiKey=48b8d49793c8496288a3e67219f8a3a5'.format(source_id)
+
+    with urllib.request.urlopen(get_sources_url) as url:
+        get_sources_data = url.read()
+        get_sources_response = json.loads(get_sources_data)
+
+        source_results = None
+
+        if get_sources_response['articles']:
+            source_results_list = get_sources_response['articles']
+            source_results = process_articles(source_results_list)
+
+
+    return source_results
+
+
+
+
+
+   
