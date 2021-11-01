@@ -1,9 +1,10 @@
-from flask import render_template
-from app import app
-from .request import get_articles, get_sources
+from flask import render_template,request,redirect,url_for
+from . import main
+from ..request import get_articles, get_sources
+from ..models import Source
 
 # Views
-@app.route('/')
+@main.route('/')
 def index():
 
     '''
@@ -11,16 +12,15 @@ def index():
     '''
 
         # Getting popular source
-    popular_sources = get_sources()
-    technology_sources = get_sources()
-    business_sources = get_sources()
-    sports_sources = get_sources()
+    technology_sources = get_sources('technology')
+    business_sources = get_sources('business')
+    sports_sources = get_sources('sports')
     
     title = 'Home - Welcome to The best Sources Review Website Online'
     
-    return render_template('index.html', title = title,popular = popular_sources,technology = technology_sources,business = business_sources,sports = sports_sources)
+    return render_template('index.html', title = title,technology = technology_sources,business = business_sources,sports = sports_sources)
 
-@app.route('/source/<int:source_id>')
+@main.route('/source/<int:source_id>')
 def source(source_id):
 
     '''
@@ -28,12 +28,15 @@ def source(source_id):
     '''
     return render_template('source.html',id = source_id) 
 
-@app.route('/articles/<source_id>')
-def articles(source_id) :
+@main.route('/articles/<id>')
+def articles(id) :
+    '''
+    View articles page showing articles  and its data
+    '''
 
-    articles =  get_articles(source_id)  
+    articles =  get_articles(id)  
 
-    print('articles')
+    
     return render_template('articles.html',articles = articles ) 
 
     
