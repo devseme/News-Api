@@ -1,3 +1,4 @@
+from os import fpathconf
 from app import app
 import urllib.request,json
 from .models import Source,Article
@@ -21,11 +22,11 @@ def manage_requests(app):
     base_url = app.config['SOURCE_BASE_URL']
     articles_url = app.config['ARTICLE_BASE_URL']
     
-def get_sources():
+def get_sources(category):
     '''
     Function that gets the json response to our url request
     '''
-    get_sources_url = Source_api_url.format(api_key)
+    get_sources_url = Source_api_url.format(category,api_key)
 
     with urllib.request.urlopen(get_sources_url) as url:
         get_sources_data = url.read()
@@ -48,7 +49,7 @@ def process_results(source_list):
         source_list: A list of dictionaries that contain source details
 
     Returns :
-        source_results: A list of source objects
+        source_results: A list of  news source objects
     '''
     source_results = []
     for articles_item in source_list:
@@ -65,9 +66,15 @@ def process_results(source_list):
 
     return source_results    
 
-def process_articles(articles_list): 
-
-
+def process_articles(articles_list):
+    '''
+    Function that returns the articles
+    
+    Args:
+        articles_list: A list of dictionaries that has all details for our articles
+    Returns:
+        articles_results:List of articles objects
+     '''
     articles_list = []
     
     for articles_item in articles_list:
@@ -86,8 +93,12 @@ def process_articles(articles_list):
 
     return articles_list
 
-def get_articles(source_id):
-    get_sources_url = 'https://newsapi.org/v2/top-headlines?sources={}&apiKey=48b8d49793c8496288a3e67219f8a3a5'.format(source_id)
+def get_articles(id):
+    '''
+    Method that gets us the articles and returns a list of articles result
+    '''
+    get_sources_url = articles_url.format(id,api_key)
+
 
     with urllib.request.urlopen(get_sources_url) as url:
         get_articles_data = url.read()
@@ -100,7 +111,7 @@ def get_articles(source_id):
             article_results_list = get_articles_response['articles']
             article_results = process_articles(article_results_list)
 
-            print('article_results_list')
+        
     return article_results
 
 
