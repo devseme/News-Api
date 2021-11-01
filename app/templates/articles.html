@@ -3,5 +3,11 @@
 
 
         {% block content %}
-        {{macro.displayArticleList(articles)}}
+    
+        {{macro.displayArticleList(articles_list)}}
+        {% for articles in articles %}
+        <img src="{{articles.urlToImage}}">
+    {% endfor %}
         {% endblock%}
+
+        

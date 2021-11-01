@@ -1,23 +1,31 @@
 from app import app
 import urllib.request,json
-from .articles import Article
+from .models import Source,Article
 
-from app.source_test import Source
-from .models import source
-
-Source = source.Source
+#Getting source api url
+Source_api_url = None
 # Getting api key
-api_key = app.config['SOURCE_API_KEY']
+api_key = None
 
 
 # Getting the source base url
-base_url = app.config["SOURCE_API_BASE_URL"]
+base_url = None
 
+#Getting Articles
+articles_url = None
+
+def manage_requests(app):
+    global  Source_api_url,api_key,base_url,articles_url
+    Source_api_url = app.config['SOURCE_API_BASE_URL']
+    api_key = app.config['NEWS_API_KEY']
+    base_url = app.config['SOURCE_BASE_URL']
+    articles_url = app.config['ARTICLE_BASE_URL']
+    
 def get_sources():
     '''
     Function that gets the json response to our url request
     '''
-    get_sources_url = 'https://newsapi.org/v2/sources?apiKey=48b8d49793c8496288a3e67219f8a3a5'
+    get_sources_url = Source_api_url.format(api_key)
 
     with urllib.request.urlopen(get_sources_url) as url:
         get_sources_data = url.read()
@@ -61,6 +69,7 @@ def process_articles(articles_list):
 
 
     articles_list = []
+    
     for articles_item in articles_list:
         author = articles_item.get('author')
         title = articles_item.get('title')
@@ -81,17 +90,18 @@ def get_articles(source_id):
     get_sources_url = 'https://newsapi.org/v2/top-headlines?sources={}&apiKey=48b8d49793c8496288a3e67219f8a3a5'.format(source_id)
 
     with urllib.request.urlopen(get_sources_url) as url:
-        get_sources_data = url.read()
-        get_sources_response = json.loads(get_sources_data)
+        get_articles_data = url.read()
+        get_articles_response = json.loads(get_articles_data)
 
-        source_results = None
+        article_results = None
 
-        if get_sources_response['articles']:
-            source_results_list = get_sources_response['articles']
-            source_results = process_articles(source_results_list)
+        if get_articles_response['articles']:
+            
+            article_results_list = get_articles_response['articles']
+            article_results = process_articles(article_results_list)
 
-
-    return source_results
+            print('article_results_list')
+    return article_results
 
 
 

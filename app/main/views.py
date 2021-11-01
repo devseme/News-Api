@@ -31,9 +31,9 @@ def source(source_id):
 @app.route('/articles/<source_id>')
 def articles(source_id) :
 
-    myArticles =  get_articles('source_id')  
+    articles =  get_articles(source_id)  
 
-
-    return render_template('articles.html',myArticles = articles ) 
+    print('articles')
+    return render_template('articles.html',articles = articles ) 
 
     
