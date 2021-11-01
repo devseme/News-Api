@@ -1,8 +1,8 @@
 from flask import Flask
-from flask_bootsrap import Bootsrap
+from flask_bootstrap import Bootstrap
 from config import config_options
 
-bootstrap = Bootsrap()
+bootstrap = Bootstrap()
 
 # Initializing application
 def create_app(config_name):
