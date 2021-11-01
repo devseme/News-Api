@@ -8,7 +8,8 @@ class Config:
 
     SOURCE_BASE_URL ='https://newsapi.org/v2/sources?language=en&category={}&apiKey={}'
     ARTICLE_BASE_URL = 'https://newsapi.org/v2/everything?language=en&sources={}&apiKey={}'
-    NEWS_API_KEY = os.environ.get('NEWS_API_KEY')
+    NEWS_API_KEY = '48b8d49793c8496288a3e67219f8a3a5'
+    # NEWS_API_KEY = os.environ.get('NEWS_API_KEY')
 
 
 
