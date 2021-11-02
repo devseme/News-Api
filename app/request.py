@@ -33,9 +33,10 @@ def get_sources(category):
         source_results = None
 
         if get_sources_response['sources']:
+           
             source_results_list = get_sources_response['sources']
             source_results = process_results(source_results_list)
-
+            
 
     return source_results
 
@@ -73,9 +74,12 @@ def process_articles(articles_list):
     Returns:
         articles_results:List of articles objects
      '''
-    articles_list = []
+    
+    # articles_list = []
+    # print(articles_list) 
     
     for articles_item in articles_list:
+        id = articles_item.get('id')
         author = articles_item.get('author')
         title = articles_item.get('title')
         description = articles_item.get('description')
@@ -83,19 +87,19 @@ def process_articles(articles_list):
         urlToImage = articles_item.get('urlToImage')
         publishedAt = articles_item.get('publishedAt')
         content = articles_item.get('content')
+         
 
+        
+        articles_object = Article(id,author,title,description,url,urlToImage,publishedAt,content)
+        articles_list.append(articles_object)
 
-        if id:
-            articles_object = Article(author,title,description,url,urlToImage,publishedAt,content)
-            articles_list.append(articles_object)
-
-    return articles_list
+        return articles_list
 
 def get_articles(id):
     '''
     Method that gets us the articles and returns a list of articles result
     '''
-    get_sources_url = articles_url.format(id,api_key)
+    get_sources_url = 'https://newsapi.org/v2/top-headlines?sources={}&apiKey=def39ff22c2543fbbc005d7eaa87b661'.format(id)
 
 
     with urllib.request.urlopen(get_sources_url) as url:
@@ -106,8 +110,13 @@ def get_articles(id):
 
         if get_articles_response['articles']:
             
+            
             article_results_list = get_articles_response['articles']
             article_results = process_articles(article_results_list)
+            # print('sssssssssssssss')
+            # print(article_results)
+            # print(article_results_list)
+
 
         
     return article_results

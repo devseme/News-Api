@@ -1,13 +1,10 @@
-{% extends 'base.html'%}
+ {% extends 'base.html'%}
 {% import 'macros.html' as macro%}
 
 
         {% block content %}
-    
-        {{macro.displayArticleList(articles_list)}}
-        {% for articles in articles %}
-        <img src="{{articles.urlToImage}}">
-    {% endfor %}
+        {{macro.displayArticlesList(articles)}}
         {% endblock%}
+
 
         
