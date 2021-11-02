@@ -75,8 +75,7 @@ def process_articles(articles_list):
         articles_results:List of articles objects
      '''
     
-    # articles_list = []
-    # print(articles_list) 
+    
     
     for articles_item in articles_list:
         id = articles_item.get('id')
@@ -113,9 +112,7 @@ def get_articles(id):
             
             article_results_list = get_articles_response['articles']
             article_results = process_articles(article_results_list)
-            # print('sssssssssssssss')
-            # print(article_results)
-            # print(article_results_list)
+            
 
 
         

@@ -1,3 +1,17 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class = "container">
+    <h2 class="article-heading">your Favourite Articles</h2>
 {% macro displaySourceList(source_list) %}
 
     {% for source in source_list %}
@@ -7,10 +21,32 @@
 {% endmacro %}
 
 {% macro displayArticlesList(articles_list) %}
+<h1 class="article-header"style="text-align:center;color: #eec390;">Your Favourite Articles</h1>
+   <div> {% for articles in articles_list %}
+        <img src="{{articles.urlToImage}}" height="200",width ="200">
+        </div>
+        <div>
+            {{articles.title}}
+        </div>
+        <div>
+            {{articles.description}}
+        </div>
+        <div>
+            {{articles.content}}
+        </div>
+        <div>
+            {{articles.author}}
+        </div>
+        <div>
+            {{articles.publishedAt}}
+        </div>
 
-    {% for articles in articles_list %}
-        <img src="{{articles.urlToImage}}">
+        <button a href={{articles.url}}>Read more</button>
     {% endfor %}
 
 {% endmacro %}
+</div>
 
+    
+</body>
+</html>

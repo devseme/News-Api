@@ -1,0 +1,19 @@
+
+  
+*{
+    background-color: #464062;
+    color:#FFFFFF;
+    margin:0;
+}
+ul li a{
+    text-decoration: none;
+    color: white;
+    display: block;
+}
+ul li a:hover{
+    background-color: #00A1DE;
+    color: black;
+}
+
+
+
