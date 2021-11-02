@@ -14,13 +14,17 @@ can choose from and read their respective articles
 
 Python 3.8  
 Flask
+## Bugs
+
+-Api key problem
+-Unresponsive Urls
 
 ## Setting up the Project
 
   * Download and install Python 3.8
   * Download and install Git.
   * Fork the Repository.
-  * Clone the repository to your local machine `$ git clone https://`
+  * Clone the repository to your local machine `$ git clone https://github.com/devseme/News-Api.git`
   * Change directory to NewsApi `$ cd NewApi
   
 ## Deployment
