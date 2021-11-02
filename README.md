@@ -16,8 +16,8 @@ Python 3.8
 Flask
 ## Bugs
 
-Api key problem
-Unresponsive Urls
+-Api key problem
+-Unresponsive Urls
 
 ## Setting up the Project
 
