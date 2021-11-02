@@ -21,27 +21,37 @@
 {% endmacro %}
 
 {% macro displayArticlesList(articles_list) %}
-<h1 class="article-header"style="text-align:center;color: #eec390;">Your Favourite Articles</h1>
-   <div> {% for articles in articles_list %}
-        <img src="{{articles.urlToImage}}" height="200",width ="200">
-        </div>
-        <div>
-            {{articles.title}}
-        </div>
-        <div>
-            {{articles.description}}
-        </div>
-        <div>
-            {{articles.content}}
-        </div>
-        <div>
-            {{articles.author}}
-        </div>
-        <div>
-            {{articles.publishedAt}}
-        </div>
+<h1 class="article-header"style="text-align:center;color: #464042;">Your Favourite Articles</h1>
+<br>
+   <div class="container">
+       <div class="card-group">
 
-        <button a href={{articles.url}}>Read more</button>
+        {% for articles in articles_list %}
+        <div class="card color-md-4">
+            <div class="card">
+        
+        <img src="{{articles.urlToImage}}"style ="border-radius:25px;"  height="60%",width ="60%">
+        <div class="card-body">
+        
+         <h3 class="card-title">{{articles.title}}</h3>
+        <p class="card-text">{{articles.description}}</p>
+        <br>
+        
+        <p class="card-text">{{articles.content}}</p> 
+             
+        <div>
+        <h4>Author:&#126;   {{articles.author}}</h4> 
+        </div>
+        <div>
+           <p>Published at: {{articles.publishedAt}}</p>
+        </div>
+        
+
+       <a href={{articles.url}} class="btn btn-outline-primary"><button class="btn bg-primary">Read more</button></a>
+       </div>
+       </div>
+       </div>
+       
     {% endfor %}
 
 {% endmacro %}
